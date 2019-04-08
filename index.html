@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Research Data Management Application</title>
+  </head>
+  <head>
+    <link rel="stylesheet" href="./CSS/style.css">
+  </head>
+  <body>
+    <p>
+      <div class="center">
+          <p>
+            <textarea class="input", id="nameInput", placeholder="the excel contains person information"></textarea>
+            <textarea class="input", id="dataInput", placeholder="the excle contains research data"></textarea>
+          </p>
+            <button class="subBtn", id="submitName">select name file</button>
+            <button class="subBtn", id="submitData">select data file</button>
+        </div>
+    </p>
+    <p>
+      <div class="center">Search data
+          <p>
+              <textarea class="input", id="first_name", placeholder="please input first name"></textarea>
+              <textarea class="input", id="last_name", placeholder="please input last name"></textarea>
+          </p>
+          
+      </div>
+    </p>
+    <script> 
+      require('./renderer.js')
+    </script>
+  </body>
+  
+</html>
+
