@@ -11,13 +11,13 @@ const path = require("path");
 let fs = require("fs");
 var itemMap = new Map();
 
-itemMap.set("Your Last Name", "Last Name");
-itemMap.set("Select Product Type", "Product Type");
-itemMap.set("Issue Date (if applicable)", "Issue Date");
-itemMap.set("EPub Date (if applicable)", "EPub Date")
-itemMap.set("PMID or PMCID (if applicable)", "PMID or PMCID");
+itemMap.set("Last Name", "Your Last Name");
+itemMap.set("Product Type", "Select Product Type");
+itemMap.set("Issue Date","Issue Date (if applicable)");
+itemMap.set("EPub Date", "EPub Date (if applicable)")
+itemMap.set("PMID or PMCID", "PMID or PMCID (if applicable)");
 
-document.getElementById('#resultTable').
+//document.getElementById('#resultTable').
 
 //update the name array according to excel files with person information
 document.querySelector('#submitName').addEventListener('click', function (event) {
@@ -90,26 +90,40 @@ document.querySelector('#submitData').addEventListener('click', function (event)
     });
 });
 
+function addRows(table, obj){
+    var header = table.headers;
+    var tr = table.insertRow(0);
+    for(var i = 0; i < table.rows[0].cells.length; ++i){
+        var cellKey = table.rows[0].cells[i];
+        var cell_t = tr.insertCell(i);
+        var newCellKey = cellKey;
+        if(itemMap.has(cellKey) ){
+            newCellKey = itemMap(cell_key);        
+        }
+        if(newCellKey in obj){
+            cell_t.innerHTML = obj.newCellKey;
+        } 
+    }
+}
 //
 document.querySelector('#searchData').addEventListener('click', function (event) {
     //read the names
-    var opts = document.getElementById('searchDataOption').text;
+    var opts = document.getElementById('searchDataOption').value;
     var name = document.getElementById('searchNameInput');
     if(opts == "err"){
         alert("items must be selected!");
         return;
     }
+    resultTable = document.getElementById('searchRersult');
     if(name != ""){
         var nameMiss = 1;
-        for(var i = 1; i < nameArray.length; ++i){
+        for(var i = 0; i < nameArray.length; ++i){
             var obj = nameArray[i];
-            if (obj["Last Name"] === names){
-                var searchResult = "";
+            if (obj["Last Name"] == name){
                 for(var j = 0; j < dataArray.length; ++j){
                     var obj_data = dataArray[i];
-                    if (obj_data["Last Name"] === names[1] && obj["Select Product Type"] === opts){
-                        searchResultArray = searchResultArray.concat(obj);
-                        document.getElementById('searchRersult').add();
+                    if (obj_data["Your Last Name"] == name && obj["Select Product Type"] === opts){
+                        addRows(resultTable, obj);
                     }
                 }
                 nameMiss = 0;
@@ -123,20 +137,18 @@ document.querySelector('#searchData').addEventListener('click', function (event)
     else{ //just search all items
         for(var j = 0; j < dataArray.length; ++j){
             var obj_data = dataArray[i];
-            if (obj_data["Last Name"] === names[1] && obj["Select Product Type"] === opts){
-                searchResultArray = searchResultArray.concat(obj);
-                document.getElementById('searchRersult').add();
+            if (obj_data["Your Last Name"] === name && obj["Select Product Type"] === opts){
+                addRows(resultTable, obj);
             }
         }
     }
-    
 });
 
 
 document.querySelector('#dumpResult').addEventListener('click', function (event) {
     dialog.showSaveDialog(function (fileName) {
-        if (files !== undefined) {
-            var ext = files[0].split('.').pop();
+        if (fileName !== undefined) {
+            var ext = fileName.split('.').pop();
             if (ext !== "xlsx"){
                 console.log("only store .xlsx file");
                 return;
