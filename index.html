@@ -21,8 +21,8 @@
     <p>
       <div class="center">Search data
           <p>
-              <textarea class="input", id="first_name", placeholder="please input first name"></textarea>
-              <select>
+              <textarea class="input", id="searchNameInput", placeholder="please input last name for search"></textarea>
+              <select id="searchDataOptions">
                 <option value="err">Select items</option>
                 <option value="Peer-reviewed Manuscript">Peer-reviewed Manuscript</option>
                 <option value="Review Article">Review Article</option>
@@ -31,7 +31,7 @@
                 <option value="Invited Talk">Invited Talk</option>
               </select>
           </p>
-          <center><button class="subBtn", id="center_button">search items</button> </center>
+          <center><button class="subBtn", id="searchData">search items</button> </center>
       </div>
     </p>
     <p>
@@ -39,7 +39,12 @@
         <table id="searchResult">
           <thead>
               <tr>
-                  <td>Last Name</td>
+                  <td>First Name</td>
+                  <td>Year Joined</td>
+                  <td>Institution</td>
+                  <td>Core/Project Affiliation</td>
+                  <td>Role in Center</td>
+                  <td>Main Occupation</td>
                   <td>Core or Project</td>
                   <td>Product Type</td>
                   <td>Product Citation</td>
@@ -55,7 +60,7 @@
               </tr>
           </thead>
         </table>
-        
+        <center><button class="subBtn", id="dumpResult">search items</button> </center>
       </div>
     </p>
     <script> 
