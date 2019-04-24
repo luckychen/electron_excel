@@ -1,81 +1,96 @@
 body {
-    background-color: powderblue;
-  }
-  h1 {
-    color: blue;
-  }
-  p {
-    color: red;
-  }
+  background-color: powderblue;
+}
+h1 {
+  color: blue;
+}
+p {
+  color: red;
+}
 .subBtn {
-    background-color: rgb(71, 151, 255);
-    border: none;
-    color: white;
-    width: 40%;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: auto;
-    cursor: pointer;
+  background-color: rgb(71, 151, 255);
+  border: none;
+  color: white;
+  width: 40%;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: auto;
+  cursor: pointer;
+}
+.subBtnHalf {
+background-color: rgb(71, 151, 255);
+border: none;
+color: white;
+width: 20%;
+padding: 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: auto;
+cursor: pointer;
 }
 
 div.fileName {
-    width: 20%;
-    height: 5%;
-    background-color: white;
+  width: 20%;
+  height: 5%;
+  background-color: white;
 }
 
 .input {
-    border: 1px solid black;
-    width: 40%;
-    padding: 10px;
+  border: 1px solid black;
+  width: 40%;
+  padding: 10px;
 }
 
 #center_button {
-    margin: auto;
-    justify-content: center;
-    width: 50%;
-    border: 3px solid #73AD21;
-    padding: 10px;
+  margin: auto;
+  justify-content: center;
+  width: 50%;
+  border: 3px solid #73AD21;
+  padding: 10px;
 }
 
 table {
-  margin: auto;
-   border-collapse: collapse;
-   overflow-x: auto;
-   display: block;
-   width: fit-content;
-   max-width: 100%;
-   box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
- }
- 
- td, th {
-   border: solid rgb(200, 200, 200) 1px;
-   padding: .5rem;
- }
- 
- th {
-   text-align: left;
-   background-color: rgb(190, 220, 250);
-   text-transform: uppercase;
-   padding-top: 1rem;
-   padding-bottom: 1rem;
-   border-bottom: rgb(50, 50, 100) solid 2px;
-   border-top: none;
- }
- 
- td {
-   white-space: nowrap;
-   border-bottom: none;
-   color: rgb(20, 20, 20);
- }
- 
- td:first-of-type, th:first-of-type {
-   border-left: none;
- }
- 
- td:last-of-type, th:last-of-type {
-   border-right: none;
- }
+margin: auto;
+ border-collapse: collapse;
+ overflow-x: auto;
+ overflow-y: auto;
+ display: block;
+ width: fit-content;
+ max-width: 100%;
+ height: 100px;
+ box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+}
+
+td, th {
+ border: solid rgb(200, 200, 200) 1px;
+ padding: .5rem;
+}
+
+th {
+ text-align: left;
+ background-color: rgb(190, 220, 250);
+ text-transform: uppercase;
+ padding-top: 1rem;
+ padding-bottom: 1rem;
+ border-bottom: rgb(50, 50, 100) solid 2px;
+ border-top: none;
+}
+
+td {
+ white-space: nowrap;
+ border-bottom: none;
+ color: rgb(20, 20, 20);
+}
+
+td:first-of-type, th:first-of-type {
+ border-left: none;
+}
+
+td:last-of-type, th:last-of-type {
+ border-right: none;
+}
