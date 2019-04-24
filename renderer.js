@@ -6,6 +6,7 @@
 
 const {dialog} = require('electron').remote;
 XLSX = require('xlsx');
+
 var nameArray = [];
 var dataArray = [];
 var productType = [ "Abstract", "Book", "Book Chapter", "Peer-reviewed Manuscript", "Presentation", "Review Article"];
@@ -68,6 +69,12 @@ document.querySelector('#submitName').addEventListener('click', function (event)
     });
 });
 
+document.querySelector('#clearName').addEventListener('click', function (event) {
+    let area = document.getElementById('nameInput');
+    nameArray = [];
+    area.value = null;
+});
+
 //update the research data array according to excel files with research records
 document.querySelector('#submitData').addEventListener('click', function (event) {
     dialog.showOpenDialog({
@@ -108,6 +115,12 @@ document.querySelector('#submitData').addEventListener('click', function (event)
     });
 });
 
+document.querySelector('#clearData').addEventListener('click', function (event) {
+    let area = document.getElementById('dataInput');
+    dataArray = [];
+    area.value = null;
+});
+
 function addRows(table, obj, obj_data){
     let tr = table.insertRow(-1);
     let tableCol = table.rows[0].cells.length;
@@ -127,9 +140,9 @@ function addRows(table, obj, obj_data){
     }
 }
 function checkCategoryMatch(data_obj, searchCriteria){
-    for(let i = 0; i < Object.keys(searchCriteria).length; ++i){
-        if(){
-
+    for(let key in searchCriteria){
+        if(data_obj[key] != searchCriteria[key]){
+            return false;
         }
     }
     return true;
@@ -141,12 +154,22 @@ function checkItems(data_obj, opts){
                 return false;
         }
     } else {
-        for(let i = 0; i < productType.length; ++i){
-            if(data_obj["Select Product Type"] != productType[i])
+        if(data_obj["Select Product Type"] != opts)
                 return false;
-        }
     }
     return true;
+}
+
+function buildSearchArray(){
+    let searchCriteria = {};
+    let core = document.getElementById('coreOrProject');
+    if(core.value != "") searchCriteria["Core or Project"] = core.value;
+    let name = document.getElementById('searchNameInput');
+    if(name.value != "") searchCriteria["Your Last Name"] = name.value;
+    let grantYear = document.getElementById('grantYear');
+    if(grantYear.value != "") searchCriteria["Grant Year"] = grantYear.value;
+
+    return searchCriteria;
 }
 //
 document.querySelector('#searchData').addEventListener('click', function (event) {
@@ -167,14 +190,23 @@ document.querySelector('#searchData').addEventListener('click', function (event)
     if(Object.keys(searchCriteria).length > 0){
         let searchMiss = 1;
         for(let i = 0; i < dataArray.length; ++i){
-            let obj = dataArray[i];
-            if (checkCategoryMatch(obj, searchCriteria) && checkItems(obj, opts)){
-                searchMiss = 0;
-                addRows(resultTable, obj, obj_data);
-                //console.log(obj_data);
+            let obj_data = dataArray[i];
+            for(let key in obj_data){
+                if(key != key.trim()){
+                    obj_data[key.trim()] = obj_data[key];
+                }
+            }
+            if (checkCategoryMatch(obj_data, searchCriteria) && checkItems(obj_data, opts)){
+                for(let j = 0; j < nameArray.length; ++j){
+                    var obj = nameArray[j];
+                    if(obj["Last Name"] == obj_data["Your Last Name"]){
+                        searchMiss = 0;
+                        addRows(resultTable, obj, obj_data);
+                    }
+                } 
             }
         }  
-        if(nameMiss == 1){
+        if(searchMiss == 1){
             alert("no match found");
             return;
         }  
@@ -198,5 +230,17 @@ document.querySelector('#dumpResult').addEventListener('click', function (event)
             alert("file name not specified");
         }
     });
+});
+
+function clearTable(table){
+    var rows = table.rows;
+    var i = rows.length;
+    while (--i) {
+        table.deleteRow(i);
+    }
+}
+document.querySelector('#resetResult').addEventListener('click', function (event) {
+    resultTable = document.getElementById('searchResult');
+    clearTable(resultTable);
 });
 
