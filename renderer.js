@@ -153,6 +153,8 @@ function checkItems(data_obj, opts){
             if(data_obj["Select Product Type"] == productType[i])
                 return false;
         }
+    } else if(opts == "All"){
+        return true;
     } else {
         if(data_obj["Select Product Type"] != opts)
                 return false;
